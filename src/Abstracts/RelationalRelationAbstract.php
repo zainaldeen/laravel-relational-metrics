@@ -9,25 +9,28 @@ abstract class RelationalRelationAbstract
     protected function returnRelationalCount($relation, $column, $value)
     {
         $model_value = $this->model::query()
-            ->whereHas($relation, function ($q) use($column, $value) {
+            ->whereHas($relation, function ($q) use ($column, $value) {
                 return $q->latest()->where($column, $value);
             })->get();
+
         return $model_value->count();
     }
 
     protected function getCountWithConditions($conditions): int
     {
         $model_value = $this->model::query();
-        foreach($conditions as $condition){
+        foreach ($conditions as $condition) {
             $model_value = $model_value
-                ->{$condition["method"]}(($condition["column"]),
+                ->{$condition["method"]}(
+                    ($condition["column"]),
                     $condition['operator'] ?? '',
-                    $condition["value"] ?? '');
+                    $condition["value"] ?? ''
+                );
         }
         $model_value = $this->model::get();
+
         return count($model_value);
     }
-
 
     protected function getCountDirectly()
     {
@@ -45,7 +48,7 @@ abstract class RelationalRelationAbstract
     protected function getResponseName()
     {
         $path = explode('\\', $this->model);
-        return 'Total '.$path[count($path)-1].' Number';
-    }
 
+        return 'Total '.$path[count($path) - 1].' Number';
+    }
 }

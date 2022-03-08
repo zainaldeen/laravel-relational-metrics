@@ -13,7 +13,6 @@ use Zainaldeen\RelationalMetrics\Interfaces\RelationalInterface;
  */
 class RelationalMetrics extends RelationalRelationAbstract implements RelationalInterface
 {
-
     public function __construct(string $target)
     {
         if (class_exists($target)) {
@@ -26,19 +25,21 @@ class RelationalMetrics extends RelationalRelationAbstract implements Relational
     public function getBasicMetrics()
     {
         $model_count = $this->getCountDirectly();
+
         return $this->returnFinalResponse($model_count);
     }
 
     public function getRelationalMetrics($relation, $column, $value)
     {
         $model_count = $this->returnRelationalCount($relation, $column, $value);
+
         return $this->returnFinalResponse($model_count);
     }
 
     public function getConditionalMetrics($conditions)
     {
         $model_count = $this->getCountWithConditions($conditions);
+
         return $this->returnFinalResponse($model_count);
     }
-
 }
