@@ -1,12 +1,23 @@
 <?php
 
-namespace Zainaldeen\RelationalMetrics\Abstracts;
+namespace SOS\RelationalMetrics\Abstracts;
 
 abstract class RelationalRelationAbstract
 {
     protected $model = '';
 
-    protected function returnRelationalCount($relation, $column, $value)
+
+    /**
+     *  return count for the model's relation depending on the relation type (where, when ... etc), column and value
+     *
+     * @param string $relation
+     * @param string $column
+     * @param mixed $value
+     * @return integer
+     * @author zainaldeen
+     */
+
+    protected function returnRelationalCount(string $relation, string $column, $value): int
     {
         $model_value = $this->model::query()
             ->whereHas($relation, function ($q) use($column, $value) {
@@ -15,7 +26,15 @@ abstract class RelationalRelationAbstract
         return $model_value->count();
     }
 
-    protected function getCountWithConditions($conditions): int
+    /**
+     * return count for the model depending on the passing conditions
+     *
+     * @param array $conditions
+     * @return integer
+     * @author zainaldeen
+     */
+
+    protected function getCountWithConditions(array $conditions): int
     {
         $model_value = $this->model::query();
         foreach($conditions as $condition){
@@ -28,6 +47,13 @@ abstract class RelationalRelationAbstract
         return count($model_value);
     }
 
+
+    /**
+     * return simple count for the model
+     *
+     * @return integer
+     * @author zainaldeen
+     */
 
     protected function getCountDirectly()
     {
