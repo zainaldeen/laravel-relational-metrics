@@ -7,7 +7,7 @@ abstract class RelationalRelationAbstract
     protected $model = '';
 
     /**
-     *  return count for the model's relation depending on the relation type (where, when ... etc), column and value
+     *  return count for the model's relation depending on the relation type (where, when ... etc), column and value..
      *
      * @param string $relation
      * @param string $column
