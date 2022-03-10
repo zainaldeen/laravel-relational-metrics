@@ -17,9 +17,8 @@ class RelationalMetrics extends RelationalRelationAbstract implements Relational
      * description
      *
      * @author zainaldeen
-     * @var string $target
+     * @var string
      */
-
     public function __construct(string $target)
     {
         if (class_exists($target)) {
@@ -35,10 +34,10 @@ class RelationalMetrics extends RelationalRelationAbstract implements Relational
      * @author zainaldeen
      * @return  array
      */
-
     public function getBasicMetrics()
     {
         $model_count = $this->getCountDirectly();
+
         return $this->returnFinalResponse($model_count);
     }
 
@@ -51,10 +50,10 @@ class RelationalMetrics extends RelationalRelationAbstract implements Relational
      * @param mixed $value
      * @return  array
      */
-
     public function getRelationalMetrics($relation, $column, $value)
     {
         $model_count = $this->returnRelationalCount($relation, $column, $value);
+
         return $this->returnFinalResponse($model_count);
     }
 
@@ -65,11 +64,10 @@ class RelationalMetrics extends RelationalRelationAbstract implements Relational
      * @param array $conditions
      * @return  array
      */
-
     public function getConditionalMetrics($conditions)
     {
         $model_count = $this->getCountWithConditions($conditions);
+
         return $this->returnFinalResponse($model_count);
     }
-
 }
